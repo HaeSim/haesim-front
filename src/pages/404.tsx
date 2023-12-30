@@ -23,7 +23,6 @@ const FlexContainer = styled('div')`
   justify-content: center;
   align-items: center;
   height: 100vh;
-  color: white;
 
   @media (max-width: 768px) {
     height: 100vh;

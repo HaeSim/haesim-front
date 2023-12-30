@@ -7,7 +7,7 @@ import { generateGetLayout } from '@/utils/common';
 const Home: NextPageWithLayout = () => {
   return (
     <>
-      <MetaInfo title="Home" description={AppConfig.description} />
+      <MetaInfo title="Posts" description={AppConfig.description} />
       {/*  */}
     </>
   );
