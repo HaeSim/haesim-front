@@ -95,7 +95,7 @@ const createAppModalSlice: StateCreator<AppModalSlice> = (set) => ({
       return set(() => ({
         modal: null,
       }));
-    }, 0);
+    }, 100);
   },
 });
 

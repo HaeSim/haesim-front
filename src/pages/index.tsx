@@ -1,13 +1,13 @@
 import MetaInfo from '@/components/_common/MetaInfo';
 import Default from '@/components/templates/Layout/Default';
-import { AppConfig } from '@/utils/AppConfig';
+import { AppConfig, PAGES } from '@/utils/AppConfig';
 import type { NextPageWithLayout } from '@/utils/common';
 import { generateGetLayout } from '@/utils/common';
 
 const Home: NextPageWithLayout = () => {
   return (
     <>
-      <MetaInfo title="Home" description={AppConfig.description} />
+      <MetaInfo title={PAGES.HOME.label} description={AppConfig.description} />
       {/*  */}
     </>
   );

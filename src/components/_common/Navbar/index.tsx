@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react';
 
 import Link from '@/components/_common/Link';
 import Logo from '@/components/_common/Logo';
+import { PAGES } from '@/utils/AppConfig';
 
 import NavLogin from '../LoginButton';
 
@@ -45,7 +46,7 @@ const Navbar: FC = () => {
       color="transparent"
       sx={{
         boxShadow: '1px 1px 4px 1px rgba(0, 0, 0, 0.1)',
-        // glassmorphism
+        // glass morphism
         backgroundColor: 'rgba(255, 255, 255, 0.5)',
         backdropFilter: 'blur(10px)',
         WebkitBackdropFilter: 'blur(10px)',
@@ -65,21 +66,13 @@ const Navbar: FC = () => {
         </Box>
         {/* navigation links */}
         <Box display="flex" justifyContent="center" gap={4}>
-          <Box sx={{ mx: 1 }}>
-            <Link href="/" noLinkStyle>
-              Home
-            </Link>
-          </Box>
-          <Box sx={{ mx: 1 }}>
-            <Link href="/about" noLinkStyle>
-              About
-            </Link>
-          </Box>
-          <Box sx={{ mx: 1 }}>
-            <Link href="/posts" noLinkStyle>
-              Posts
-            </Link>
-          </Box>
+          {Object.entries(PAGES).map(([key, value]) => (
+            <Box key={key} sx={{ mx: 1 }}>
+              <Link href={value.path} noLinkStyle>
+                {value.label}
+              </Link>
+            </Box>
+          ))}
         </Box>
         {/* login button */}
         <Box minWidth={100} display="flex" justifyContent="center">

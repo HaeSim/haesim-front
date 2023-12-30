@@ -29,6 +29,7 @@ const Default: ILayoutComponent = ({ children }) => {
 
   return (
     <>
+      {/* scroll 이 존재할 때만 progress bar를 보여준다. */}
       <LinearProgress
         variant="determinate"
         value={scrollProgress * 100}
@@ -38,8 +39,11 @@ const Default: ILayoutComponent = ({ children }) => {
           left: 0,
           right: 0,
           zIndex: 9999,
+          opacity: scrollProgress > 0 ? 1 : 0,
+          transition: 'opacity 0.5s',
         }}
       />
+
       <Navbar />
       <Container
         component="main"

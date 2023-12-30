@@ -3,7 +3,7 @@ import { Box, Paper, Typography } from '@mui/material';
 import MetaInfo from '@/components/_common/MetaInfo';
 import Default from '@/components/templates/Layout/Default';
 import postsData from '@/data/posts.json';
-import { AppConfig } from '@/utils/AppConfig';
+import { AppConfig, PAGES } from '@/utils/AppConfig';
 import type { NextPageWithLayout } from '@/utils/common';
 import { generateGetLayout } from '@/utils/common';
 
@@ -20,7 +20,7 @@ type Post = {
 const Posts: NextPageWithLayout = () => {
   return (
     <>
-      <MetaInfo title="Posts" description={AppConfig.description} />
+      <MetaInfo title={PAGES.POSTS.label} description={AppConfig.description} />
       <Box display="flex" flexDirection="column" gap={3}>
         {postsData.map((post: Post, index: number) => (
           <Paper
