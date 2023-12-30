@@ -32,8 +32,9 @@ export default function MyDocument({ emotionStyleTags }: MyDocumentProps) {
         {/* font */}
         <link
           rel="stylesheet"
-          type="text/css"
-          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
+          as="style"
+          crossOrigin="anonymous"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css"
         />
       </Head>
       <body>

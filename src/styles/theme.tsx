@@ -7,6 +7,7 @@ import globalStyles from './globalStyles';
 const theme = createTheme({
   typography: {
     fontFamily: [
+      'Pretendard Variable',
       'Pretendard',
       '-apple-system',
       'BlinkMacSystemFont',
@@ -17,6 +18,9 @@ const theme = createTheme({
       'Apple SD Gothic Neo',
       'Noto Sans KR',
       'Malgun Gothic',
+      'Apple Color Emoji',
+      'Segoe UI Emoji',
+      'Segoe UI Symbol',
       'sans-serif',
     ].join(','),
   },
