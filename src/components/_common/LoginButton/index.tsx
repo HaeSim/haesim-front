@@ -1,4 +1,4 @@
-import { Backdrop, Button } from '@mui/material';
+import LoadingButton from '@mui/lab/LoadingButton';
 import { signOut, useSession } from 'next-auth/react';
 import React from 'react';
 
@@ -23,17 +23,16 @@ const NavLogin: React.FC = () => {
 
   if (!sessionStatus) return null;
 
-  if (sessionStatus === 'loading') return <Backdrop open />;
-
   return (
-    <Button
+    <LoadingButton
+      loading={sessionStatus === 'loading'}
       onClick={
         sessionStatus === 'authenticated' ? handleLogoutClick : handleLoginClick
       }
     >
       {sessionStatus === 'authenticated' && 'Logout'}
       {sessionStatus === 'unauthenticated' && 'Login'}
-    </Button>
+    </LoadingButton>
   );
 };
 

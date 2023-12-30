@@ -14,9 +14,9 @@ export const AppConfig: AppConfigType = {
   site_name: 'haesim',
   title: 'haesim',
   description: 'haesim 사이트',
-  imageUrl: '-',
+  imageUrl: '/images/og_haesim.png',
   locale: 'ko',
-  canonical: 'https://blog.hae-sim.com',
+  canonical: 'https://haesim.me',
   base_url: '/api/v1',
 };
 

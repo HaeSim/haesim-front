@@ -1,5 +1,5 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: 'https://blog.hae-sim.com', // FIXME: Change to the production URL
+  siteUrl: 'https://haesim.me', // FIXME: Change to the production URL
   generateRobotsTxt: true,
 };

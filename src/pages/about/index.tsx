@@ -4,7 +4,7 @@ import { AppConfig } from '@/utils/AppConfig';
 import type { NextPageWithLayout } from '@/utils/common';
 import { generateGetLayout } from '@/utils/common';
 
-const Home: NextPageWithLayout = () => {
+const About: NextPageWithLayout = () => {
   return (
     <>
       <MetaInfo title="About" description={AppConfig.description} />
@@ -13,6 +13,6 @@ const Home: NextPageWithLayout = () => {
   );
 };
 
-Home.getLayout = generateGetLayout(Default);
+About.getLayout = generateGetLayout(Default);
 
-export default Home;
+export default About;
