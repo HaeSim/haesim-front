@@ -28,6 +28,11 @@ const globalStyles = css`
   .MuiModal-backdrop {
     backdrop-filter: blur(2px);
   }
+  /* scroll bar가 영역을 차지하지 않고, 투명하게 보이도록 설정 */
+  ::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+  }
 `;
 
 export default globalStyles;

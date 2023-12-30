@@ -1,7 +1,8 @@
 import { Box } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import React from 'react';
+import type { FC } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Link from '@/components/_common/Link';
 import Logo from '@/components/_common/Logo';
@@ -15,13 +16,35 @@ import NavLogin from '../LoginButton';
  * - navigation links(centered)
  * - login button(right)
  */
-const Navbar = () => {
+const Navbar: FC = () => {
+  // scroll event를 감지하여, navbar의 보이는 상태를 조절한다.
+  const [showNav, setShowNav] = useState<boolean>(true);
+
+  // scroll event를 감지하여, navbar의 보이는 상태를 조절한다.
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.pageYOffset;
+      const visible = currentScrollPos < 100;
+
+      setShowNav(visible);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
   return (
     <AppBar
-      position="static"
+      position="fixed"
+      style={{
+        top: showNav ? 4 : -64,
+        transition: 'top 0.5s',
+      }}
       color="transparent"
       sx={{
-        boxShadow: '1px 1px 10px 1px rgba(0, 0, 0, 0.1)',
+        boxShadow: '1px 1px 4px 1px rgba(0, 0, 0, 0.1)',
         // glassmorphism
         backgroundColor: 'rgba(255, 255, 255, 0.5)',
         backdropFilter: 'blur(10px)',
