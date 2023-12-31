@@ -12,6 +12,7 @@ import {
 import { Analytics } from '@vercel/analytics/react';
 import type { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
+import Script from 'next/script';
 import { SessionProvider } from 'next-auth/react';
 import { type ReactElement, useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
@@ -20,6 +21,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import ComponentModal from '@/components/_common/ComponentModal';
 import MessageModal from '@/components/_common/MessageModal';
 import SessionCallback from '@/components/_common/SessionCallback';
+import * as gtag from '@/lib/gtag';
 import useClientStore from '@/store/client';
 import createEmotionCache from '@/styles/createEmotionCache';
 import theme from '@/styles/theme';
@@ -71,9 +73,12 @@ const MyApp = (props: MyAppProps) => {
       }, 700);
     };
 
-    const handleRouteChangeComplete = (_url: URL) => {
+    const handleRouteChangeComplete = (url: URL) => {
       clearTimeout(backdropTimer);
       closeBackdrop();
+
+      // GA
+      gtag.pageview(url);
     };
 
     router.events.on('routeChangeStart', handleRouteChangeStart);
@@ -101,40 +106,73 @@ const MyApp = (props: MyAppProps) => {
   }, [router.query]);
 
   return (
-    <SessionProvider session={pageProps.session}>
-      <QueryClientProvider client={queryClient}>
-        <CacheProvider value={emotionCache}>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
-            {getLayout(<Component {...pageProps} />)}
-            <ComponentModal />
-            <MessageModal />
-            <Backdrop
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                color: '#fff',
-                zIndex: (tm) => tm.zIndex.drawer + 1,
-              }}
-              open={backdropVisible}
-            >
-              <CircularProgress color="inherit" />
-              <Typography
-                variant="h6"
-                align="center"
-                fontWeight="bold"
-                marginTop={2}
+    <>
+      <Script
+        strategy="afterInteractive"
+        src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
+      />
+      <Script
+        id="gtag-init"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '${gtag.GA_TRACKING_ID}', {
+          page_path: window.location.pathname,
+        });
+      `,
+        }}
+      />
+      <Script
+        id="clarity-init"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+          (function(c,l,a,r,i,t,y){
+              c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+              t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+              y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          })(window, document, "clarity", "script", "kedhanxznf");
+        `,
+        }}
+      />
+      <SessionProvider session={pageProps.session}>
+        <QueryClientProvider client={queryClient}>
+          <CacheProvider value={emotionCache}>
+            <ThemeProvider theme={theme}>
+              <CssBaseline />
+              {getLayout(<Component {...pageProps} />)}
+              <ComponentModal />
+              <MessageModal />
+              <Backdrop
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  color: '#fff',
+                  zIndex: (tm) => tm.zIndex.drawer + 1,
+                }}
+                open={backdropVisible}
               >
-                {backdropMessage}
-              </Typography>
-            </Backdrop>
-            <Toaster />
-            <SessionCallback />
-            <Analytics />
-          </ThemeProvider>
-        </CacheProvider>
-      </QueryClientProvider>
-    </SessionProvider>
+                <CircularProgress color="inherit" />
+                <Typography
+                  variant="h6"
+                  align="center"
+                  fontWeight="bold"
+                  marginTop={2}
+                >
+                  {backdropMessage}
+                </Typography>
+              </Backdrop>
+              <Toaster />
+              <SessionCallback />
+              <Analytics />
+            </ThemeProvider>
+          </CacheProvider>
+        </QueryClientProvider>
+      </SessionProvider>
+    </>
   );
 };
 export default MyApp;
