@@ -6,9 +6,10 @@ import { Pagination } from '@/components/pagination';
 export default async function BlogPage({
   searchParams,
 }: {
-  searchParams: { page: string };
+  searchParams: Promise<{ page?: string }>;
 }) {
-  const page = parseInt(searchParams.page) || 1;
+  const params = await searchParams;
+  const page = parseInt(params.page || '1');
   const limit = 10;
   const skip = (page - 1) * limit;
 
