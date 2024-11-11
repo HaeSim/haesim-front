@@ -1,7 +1,8 @@
 // src/app/(routes)/blog/page.tsx
 import prisma from '@/lib/prisma';
-import { PostCard } from '@/components/blog/post-card';
+
 import { Pagination } from '@/components/pagination';
+import { PostCard } from '@/app/_component/PostCard';
 
 export default async function BlogPage({
   searchParams,
