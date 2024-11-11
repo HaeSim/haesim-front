@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import '@/styles/globals.css';
+import '@uiw/react-md-editor/markdown-editor.css';
+import '@uiw/react-markdown-preview/markdown.css';
 import { Header } from '@/app/_component/layout/Header';
 import { Navigation } from '@/app/_component/layout/Navigation';
 

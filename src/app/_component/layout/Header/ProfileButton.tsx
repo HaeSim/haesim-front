@@ -11,7 +11,8 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { createClient } from '@/utils/supabase/client';
 import { User } from '@supabase/supabase-js';
-import { LogOut, User as UserIcon } from 'lucide-react';
+import { LogOut, Plus, User as UserIcon } from 'lucide-react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
@@ -88,6 +89,13 @@ export function ProfileButton() {
           </div>
         </div>
         <DropdownMenuSeparator />
+        {/* 글쓰기 */}
+        <Link href='/blog/write' passHref>
+          <DropdownMenuItem>
+            <Plus className='mr-2 h-4 w-4' />
+            <span>글쓰기</span>
+          </DropdownMenuItem>
+        </Link>
         <DropdownMenuItem onClick={handleLogout}>
           <LogOut className='mr-2 h-4 w-4' />
           <span>로그아웃</span>

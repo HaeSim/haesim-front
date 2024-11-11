@@ -16,9 +16,11 @@ export default async function BlogPostPage({
 }) {
   const { slug } = await params;
 
+  const decodedSlug = decodeURIComponent(slug);
+
   const post = await prisma.posts.findUnique({
     where: {
-      slug,
+      slug: decodedSlug,
       is_published: true,
     },
     include: {
@@ -44,7 +46,7 @@ export default async function BlogPostPage({
   const typedPost = post;
 
   await prisma.posts.update({
-    where: { slug },
+    where: { slug: decodedSlug },
     data: {
       view_count: {
         increment: 1,
