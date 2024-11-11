@@ -16,7 +16,7 @@ export async function GET(request: Request) {
     if (error) {
       console.error('Auth error:', error, errorDescription);
       return NextResponse.redirect(
-        `${origin}/login?error=${encodeURIComponent(errorDescription || 'Unknown error')}`
+        `${origin}/?error=${encodeURIComponent(errorDescription || 'Unknown error')}`
       );
     }
 
@@ -28,7 +28,7 @@ export async function GET(request: Request) {
       if (sessionError) {
         console.error('Session error:', sessionError);
         return NextResponse.redirect(
-          `${origin}/login?error=${encodeURIComponent(sessionError.message)}`
+          `${origin}/?error=${encodeURIComponent(sessionError.message)}`
         );
       }
     }
@@ -40,8 +40,6 @@ export async function GET(request: Request) {
     return NextResponse.redirect(`${origin}/`);
   } catch (error) {
     console.error('Callback error:', error);
-    return NextResponse.redirect(
-      `${origin}/login?error=Unexpected error occurred`
-    );
+    return NextResponse.redirect(`${origin}/?error=Unexpected error occurred`);
   }
 }
