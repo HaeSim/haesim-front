@@ -16,8 +16,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: '기술 블로그',
-  description: 'Next.js로 만든 기술 블로그',
+  title: '혜심 블로그',
+  description: '철진난만 블로그',
 };
 
 export default function RootLayout({
@@ -35,7 +35,7 @@ export default function RootLayout({
         {children}
         <footer className='border-t mt-8'>
           <div className='container mx-auto px-4 py-6 text-center text-muted-foreground'>
-            <p>&copy; 2024 기술 블로그. All rights reserved.</p>
+            <p>&copy; 2024 혜심 블로그. All rights reserved.</p>
           </div>
         </footer>
       </body>

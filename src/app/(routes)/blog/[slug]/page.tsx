@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import Link from 'next/link';
 import { Eye, Calendar, User } from 'lucide-react';
+import MarkdownViewer from '@/components/blog/markdown/markdown-viewer';
 
 export default async function BlogPostPage({
   params,
@@ -88,7 +89,7 @@ export default async function BlogPostPage({
 
         {/* 본문 */}
         <div className='py-4'>
-          {/* <Markdown content={typedPost.content} /> */}
+          <MarkdownViewer content={typedPost.content} />
         </div>
 
         <Separator />
