@@ -1,8 +1,7 @@
-// src/app/(routes)/blog/write/_components/PostPreview.tsx
 'use client';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import MarkdownViewer from '@/components/blog/markdown/markdown-viewer';
+import MarkdownViewer from '@/components/posts/markdown/markdown-viewer';
 import { useFormContext } from 'react-hook-form';
 import { PostFormData } from '@/schemas/forms/post.form.schema';
 

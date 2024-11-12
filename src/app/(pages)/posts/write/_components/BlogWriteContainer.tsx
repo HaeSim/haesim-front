@@ -41,7 +41,7 @@ export function BlogWriteContainer() {
       }
 
       toast.success('포스트가 성공적으로 저장되었습니다.');
-      router.push('/blog');
+      router.push('/posts');
     } catch (error) {
       console.error('Error:', error);
       toast.error(

@@ -1,4 +1,4 @@
-import { PostCardSkeleton } from './_component/PostCard/skeleton';
+import { PostCardSkeleton } from '../_component/PostCard/skeleton';
 
 export default function Loading() {
   return (

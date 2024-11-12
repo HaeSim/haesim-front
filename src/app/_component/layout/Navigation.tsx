@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 const NAV_ITEMS = [
   { name: '홈', path: '/' },
-  { name: '포스트', path: '/blog' },
+  { name: '포스트', path: '/posts' },
   { name: '작업실', path: '/works' },
 ];
 

@@ -1,4 +1,3 @@
-// src/app/(routes)/blog/write/page.tsx
 'use client';
 
 import { PostFormProvider } from './_components/PostFormProvider';

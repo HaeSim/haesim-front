@@ -90,7 +90,7 @@ export function ProfileButton() {
         </div>
         <DropdownMenuSeparator />
         {/* 글쓰기 */}
-        <Link href='/blog/write' passHref>
+        <Link href='/posts/write' passHref>
           <DropdownMenuItem>
             <Plus className='mr-2 h-4 w-4' />
             <span>글쓰기</span>

@@ -1,4 +1,3 @@
-// src/app/(routes)/blog/[slug]/page.tsx
 import prisma from '@/lib/prisma';
 import { notFound } from 'next/navigation';
 import { format } from 'date-fns';
@@ -7,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import Link from 'next/link';
 import { Eye, Calendar, User } from 'lucide-react';
-import MarkdownViewer from '@/components/blog/markdown/markdown-viewer';
+import MarkdownViewer from '@/components/posts/markdown/markdown-viewer';
 
 export default async function BlogPostPage({
   params,

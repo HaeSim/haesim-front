@@ -1,20 +1,18 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
+import { Noto_Sans_KR } from 'next/font/google';
 import '@/styles/globals.css';
 import '@uiw/react-md-editor/markdown-editor.css';
 import '@uiw/react-markdown-preview/markdown.css';
 import { Header } from '@/app/_component/layout/Header';
 import { Navigation } from '@/app/_component/layout/Navigation';
 
-const geistSans = localFont({
-  src: '../assets/fonts/GeistVF.woff',
-  variable: '--font-geist-sans',
-  weight: '100 900',
-});
-const geistMono = localFont({
-  src: '../assets/fonts/GeistMonoVF.woff',
-  variable: '--font-geist-mono',
-  weight: '100 900',
+const notoSansKR = Noto_Sans_KR({
+  subsets: ['latin'],
+  preload: true,
+  display: 'swap',
+  variable: '--font-notoSansKR',
+  fallback: ['system-ui', '-apple-system', 'sans-serif'],
 });
 
 export const metadata: Metadata = {
@@ -30,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang='ko' suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-background text-foreground`}
+        className={`${notoSansKR.variable} antialiased min-h-screen bg-background text-foreground`}
       >
         <Header />
         <Navigation />

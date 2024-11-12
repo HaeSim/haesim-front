@@ -1,4 +1,3 @@
-// src/app/(routes)/blog/page.tsx
 import prisma from '@/lib/prisma';
 
 import { Pagination } from '@/components/pagination';
