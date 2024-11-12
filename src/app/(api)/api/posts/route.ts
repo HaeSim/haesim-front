@@ -34,9 +34,13 @@ export async function POST(req: Request) {
 
     const post = await prisma.posts.create({
       data: {
-        ...validatedData,
-        author_id: author.id,
+        title: validatedData.title,
+        slug: validatedData.slug,
+        content: validatedData.content,
+        authors: { connect: { id: author.id } },
+        is_published: validatedData.is_published,
         published_at: validatedData.is_published ? new Date() : null,
+        og_image: validatedData.og_image,
       },
     });
 
