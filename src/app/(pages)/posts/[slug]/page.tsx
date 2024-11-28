@@ -12,14 +12,13 @@ import { generateBlogPostSchema } from '@/utils/schema';
 import Script from 'next/script';
 
 interface Props {
-  params: {
-    slug: string;
-  };
+  params: Promise<{ slug: string }>;
 }
 
 // 메타데이터 생성
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const decodedSlug = decodeURIComponent(params.slug);
+  const { slug } = await params;
+  const decodedSlug = decodeURIComponent(slug);
 
   const post = await prisma.posts.findUnique({
     where: {
@@ -91,7 +90,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function BlogPostPage({ params }: Props) {
-  const { slug } = params;
+  const { slug } = await params;
   const decodedSlug = decodeURIComponent(slug);
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://haesim.me';
 
