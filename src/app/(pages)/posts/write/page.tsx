@@ -1,3 +1,4 @@
+// src/app/(routes)/posts/write/page.tsx
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -10,30 +11,27 @@ import { useRouter } from 'next/navigation';
 export default function BlogPostWritePage() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
-    // TODO: Fetch categories from API
-    setCategories([
-      {
-        id: BigInt(1),
-        name: 'Technology',
-        slug: 'technology',
-        description: null,
-      },
-      {
-        id: BigInt(2),
-        name: 'Travel',
-        slug: 'travel',
-        description: null,
-      },
-      {
-        id: BigInt(3),
-        name: 'Food',
-        slug: 'food',
-        description: null,
-      },
-    ]);
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch('/api/categories');
+        if (!response.ok) {
+          throw new Error('카테고리를 불러오는데 실패했습니다.');
+        }
+        const data = await response.json();
+        setCategories(data);
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+        toast.error('카테고리를 불러오는데 실패했습니다.');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchCategories();
   }, []);
 
   const handleSubmit = async (data: PostFormData) => {
@@ -47,7 +45,7 @@ export default function BlogPostWritePage() {
         },
         body: JSON.stringify({
           ...data,
-          slug: data.title.toLowerCase().replace(/ /g, '-'), // 임시 slug 생성
+          slug: data.title.toLowerCase().replace(/ /g, '-'),
         }),
       });
 
@@ -57,7 +55,7 @@ export default function BlogPostWritePage() {
 
       const result = await response.json();
       toast.success('포스트가 성공적으로 작성되었습니다.');
-      router.push('/posts'); // 포스트 목록으로 이동
+      router.push('/posts');
     } catch (error) {
       console.error('Error submitting post:', error);
       toast.error('포스트 작성 중 오류가 발생했습니다.');
@@ -65,6 +63,19 @@ export default function BlogPostWritePage() {
       setIsSubmitting(false);
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className='container mx-auto py-6'>
+        <h1 className='text-3xl font-bold mb-6'>새 포스트 작성</h1>
+        <div className='animate-pulse'>
+          <div className='h-8 bg-secondary rounded w-1/4 mb-4'></div>
+          <div className='h-32 bg-secondary rounded mb-4'></div>
+          <div className='h-8 bg-secondary rounded w-1/3'></div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className='container mx-auto py-6'>

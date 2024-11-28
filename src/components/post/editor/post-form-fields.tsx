@@ -72,43 +72,6 @@ export function PostFormFields({
         )}
       />
 
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-        <FormField
-          control={form.control}
-          name='excerpt'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>요약</FormLabel>
-              <FormControl>
-                <Textarea placeholder='포스트 요약을 작성하세요' {...field} />
-              </FormControl>
-              <FormDescription>
-                검색 결과에 표시될 요약문입니다.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name='meta_description'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>메타 설명</FormLabel>
-              <FormControl>
-                <Textarea
-                  placeholder='SEO를 위한 메타 설명을 작성하세요'
-                  {...field}
-                />
-              </FormControl>
-              <FormDescription>검색 엔진에 표시될 설명입니다.</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      </div>
-
       <div className='grid grid-cols-1 md:grid-cols-2 gap-4 items-center'>
         <FormField
           control={form.control}
@@ -136,23 +99,6 @@ export function PostFormFields({
                   ))}
                 </SelectContent>
               </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name='is_published'
-          render={({ field }) => (
-            <FormItem className='flex items-center gap-2'>
-              <FormControl>
-                <Switch
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
-                />
-              </FormControl>
-              <FormLabel className='!mt-0'>공개 여부</FormLabel>
               <FormMessage />
             </FormItem>
           )}

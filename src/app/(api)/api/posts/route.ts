@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { createClient } from '@/utils/supabase/server';
 import { PostCreateRequestSchema } from '@/schemas/forms/post.form.schema';
+import { calculateReadingTime } from '@/utils/calculate-reading-time';
+import { generateExcerpt, generateMetaDescription } from '@/utils/ai/claude';
 
 export async function POST(req: Request) {
   try {
@@ -32,15 +34,25 @@ export async function POST(req: Request) {
     const body = await req.json();
     const validatedData = PostCreateRequestSchema.parse(body);
 
+    const readingTime = calculateReadingTime(validatedData.content);
+
+    const [excerpt, metaDescription] = await Promise.all([
+      generateExcerpt(validatedData.content),
+      generateMetaDescription(validatedData.title, validatedData.content),
+    ]);
+
     const post = await prisma.posts.create({
       data: {
         title: validatedData.title,
         slug: validatedData.slug,
         content: validatedData.content,
         authors: { connect: { id: author.id } },
-        is_published: validatedData.is_published,
-        published_at: validatedData.is_published ? new Date() : null,
+        is_published: true,
+        published_at: new Date(),
         og_image: validatedData.og_image,
+        reading_time_minutes: readingTime,
+        excerpt,
+        meta_description: metaDescription,
       },
     });
 
