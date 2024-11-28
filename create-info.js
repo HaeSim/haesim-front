@@ -7,7 +7,7 @@ const DESTINATION_DIR = './collected-files'; // 파일들을 복사할 디렉토
 const PATH_MAPPING_FILE = './collected-files/_file-paths.json'; // 경로 매핑 파일
 
 // 제외할 디렉토리 경로들 (SOURCE_DIR로부터의 상대 경로)
-const EXCLUDE_DIRS = ['_components/editor', '_components/ui'];
+const EXCLUDE_DIRS = ['components/ui'];
 
 function createDirIfNotExists(dir) {
   if (!fs.existsSync(dir)) {
