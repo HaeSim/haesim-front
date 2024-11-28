@@ -81,7 +81,7 @@ export function PostFormFields({
               <FormLabel>카테고리</FormLabel>
               <Select
                 onValueChange={(value) => field.onChange(Number(value))}
-                value={field.value?.toString()}
+                value={field.value?.toString() || undefined} // undefined로 설정하여 placeholder 표시
               >
                 <FormControl>
                   <SelectTrigger>

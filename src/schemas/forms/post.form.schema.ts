@@ -3,17 +3,16 @@ import { PostSchema } from '@/models/post';
 import { z } from 'zod';
 
 // Form에 필요한 부분만 추출하여 새로운 스키마 작성
-// src/schemas/forms/post.form.schema.ts 수정
 export const PostFormSchema = z.object({
   title: z.string().min(1, '제목을 입력해주세요'),
   content: z.string().min(1, '내용을 입력해주세요'),
-  excerpt: z.string().optional().default(''), // null 대신 optional string
-  meta_description: z.string().optional().default(''),
-  seo_title: z.string().optional().default(''),
-  category_id: z.number().nullable(),
+  excerpt: z.string().optional(),
+  meta_description: z.string().optional(),
+  seo_title: z.string().optional(),
+  category_id: z.number().min(1, '카테고리를 선택해주세요'), // null 대신 필수값으로
   tags: z.array(z.string()).default([]),
-  featured_image: z.string().optional().default(''),
-  og_image: z.string().optional().default(''),
+  featured_image: z.string().optional(),
+  og_image: z.string().optional(),
   is_published: z.boolean().default(true),
 });
 

@@ -3,7 +3,7 @@ import Link from 'next/link';
 export function PostCard({ post }: { post: any }) {
   return (
     <article className='p-6 bg-card rounded-lg shadow-sm'>
-      <Link href={`/posts/${post.slug}`}>
+      <Link href={`/posts/${encodeURIComponent(post.slug)}`}>
         <h2 className='text-2xl font-semibold mb-2 hover:text-primary'>
           {post.title}
         </h2>

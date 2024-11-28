@@ -33,7 +33,7 @@ export function PostEditor({
       content: '',
       excerpt: '',
       meta_description: '',
-      category_id: null,
+      category_id: undefined,
       is_published: false,
       tags: [],
     },
