@@ -1,4 +1,4 @@
-import { ThemeToggle } from '@/app/_component/layout/Header/ThemeToggle';
+import { ThemeToggle } from '@/app/_component/layout/Header/theme-toggle';
 import { ProfileButton } from '@/app/_component/layout/Header/ProfileButton';
 import { Separator } from '@/components/ui/separator';
 
